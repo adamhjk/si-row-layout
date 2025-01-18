@@ -1,5 +1,5 @@
 // Define the interfaces for ITEMS, COMPONENTS, and FRAMES
-interface Item {
+export interface Item {
   id: string;
   width: number;
   height: number;
@@ -7,24 +7,24 @@ interface Item {
   y: number;
 }
 
-interface Component extends Item {
+export interface Component extends Item {
   type: "COMPONENT";
 }
 
-interface Frame extends Item {
+export interface Frame extends Item {
   type: "FRAME";
   rows: Item[][];
 }
 
 // Utility function to calculate row dimensions
-function calculateRowDimensions(row: Item[]): { width: number; height: number } {
+export function calculateRowDimensions(row: Item[]): { width: number; height: number } {
   const width = row.reduce((acc, item) => acc + item.width + 50, -50); // Add padding between items
   const height = row.reduce((acc, item) => Math.max(acc, item.height), 0);
   return { width, height };
 }
 
 // Recursive function to ensure nested frames have proper layout
-function layoutFrame(frame: Frame, offsetX: number = 0, offsetY: number = 0): void {
+export function layoutFrame(frame: Frame, offsetX: number = 0, offsetY: number = 0): void {
   console.log(`Laying out frame: ${frame.id}`);
   let currentY = offsetY + 50; // Start with padding at the top
 
@@ -58,7 +58,7 @@ function layoutFrame(frame: Frame, offsetX: number = 0, offsetY: number = 0): vo
 }
 
 // Function to lay out ITEMS, distinguishing between COMPONENTS and FRAMES
-function layoutItems(items: Item[]): void {
+export function layoutItems(items: Item[]): void {
   console.log("Starting layout of items");
   items.forEach(item => {
     console.log(`Processing item: ${item.id}`);
@@ -70,7 +70,7 @@ function layoutItems(items: Item[]): void {
 }
 
 // Function to flatten items from a nested structure
-function flattenItems(items: Item[]): Item[] {
+export function flattenItems(items: Item[]): Item[] {
   const result: Item[] = [];
 
   items.forEach(item => {
